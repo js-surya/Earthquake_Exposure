@@ -10,7 +10,7 @@ January 2026
 
 ## 1. Introduction
 
-For this assignment, we wanted to figure out which cities in Asia are most at risk from earthquakes. Instead of just looking at how close cities are to earthquakes, we used something called Peak Ground Acceleration (PGA) which is what engineers actually use to measure earthquake impact.
+For this assignment, we wanted to figure out which cities in Asia are most at risk from earthquakes. Instead of just looking at how close cities are to earthquakes, we used Peak Ground Acceleration (PGA) which measures how much the ground actually shakes.
 
 The main goal was to:
 - Get earthquake data from USGS
