@@ -96,26 +96,65 @@ The main analysis runs in a Jupyter notebook (`exploration.ipynb`).
 
 ### Libraries we used:
 - GeoPandas for the geographic data
-- Plotly for interactive maps
+- Plotly for interactive maps and all charts
 - SciPy for the KD-tree
 - Pandas and NumPy for data processing
+
+### Visualizations:
+The notebook generates 5 interactive charts:
+1. Interactive risk map (dark theme with blue earthquakes, red cities)
+2. Top 20 cities bar chart
+3. PGA distribution histogram
+4. Risk category pie chart
+5. PGA attenuation with distance plot
 
 ---
 
 ## 5. Results
 
-After running the analysis on 2025 earthquake data, we found that cities in Japan and Indonesia tend to have the highest risk because they're close to where big earthquakes happen.
+We ran the analysis on 1721 cities and 1263 earthquakes from 2025. Here's what we found:
 
-The KD-tree made the analysis much faster - instead of doing hundreds of thousands of distance checks, it only needed a few thousand.
+### How many cities in each risk category:
+- CRITICAL: 1 city
+- MODERATE: 4 cities
+- LOW: 15 cities
+- MINIMAL: 1701 cities (basically everyone else)
+
+Most cities are minimal risk which makes sense - not everywhere has earthquakes nearby.
+
+### Cities with highest risk:
+1. Mandalay, Myanmar (PGA = 2.46g) - this one was really high, probably because of a big earthquake nearby
+2. Hualien, Taiwan (PGA = 0.19g)
+3. Banda Aceh, Indonesia (PGA = 0.16g)
+4. Miyazaki, Japan (PGA = 0.16g)
+5. Naypyidaw, Myanmar (PGA = 0.12g)
+
+### What we noticed:
+- Myanmar had the highest risk cities, probably due to some big earthquakes there in 2025
+- Taiwan and Indonesia are on the Ring of Fire so it makes sense they show up
+- Japan has lots of earthquakes but the big cities aren't always right next to them
+- The KD-tree thing really sped up the analysis - way faster than checking every city against every earthquake one by one
 
 ---
 
-## 6. Problems and Future Work
+## 6. Limitations
 
-Some things we could improve:
-- The PGA formula we used is simplified. Real engineers use more complex ones
-- We treat cities as single points but they're actually spread out areas
-- We only looked at one year of data
+There are some things our analysis doesn't handle well:
+
+### Data limitations:
+- We only looked at earthquakes from 2025, so cities that had big earthquakes in previous years might not show up as high risk
+- The city data treats each city as a single point, but in reality cities are spread out over a large area
+- Some smaller cities might not be in the dataset we used
+
+### Method limitations:
+- The PGA formula we used is pretty simplified compared to what actual earthquake engineers use. They have way more complex models that consider things like soil type and building foundations
+- We assume all earthquakes affect cities the same way, but really the type of fault and direction of shaking matters too
+- Our search radius formula is an approximation - real felt distance depends on lots of factors (soil type, fault direction, local geology, building type)
+
+### What we would do differently next time:
+- Use multiple years of data to get a better picture
+- Maybe include data about building quality in different cities
+- Try using a more advanced GMPE model if we had more time
 
 ---
 

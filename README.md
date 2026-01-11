@@ -54,10 +54,13 @@ earthquake_exposure/
 │   ├── preprocess.py     # cleans it up
 │   ├── spatial_index.py  # KD-tree for fast searching
 │   ├── metrics.py        # PGA calculations
-│   └── viz.py           # makes the maps
+│   └── viz.py            # makes the maps
 ├── notebooks/
 │   └── exploration.ipynb # main analysis
-├── outputs/              # results go here
+├── outputs/              # all results go here
+│   ├── interactive_risk_map.html
+│   ├── seismic_risk_results.csv
+│   └── summary_statistics.txt
 └── METHODOLOGY.md        # explains how it works
 ```
 
