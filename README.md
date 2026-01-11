@@ -44,6 +44,25 @@ Then just run all the cells. It will:
 Results are saved to the `outputs/` folder:
 - `seismic_risk_results.csv` - all the city risk data
 - `summary_statistics.txt` - quick overview of results
+- `interactive_risk_map.html` - the interactive map
+
+### 4. Run the REST API (optional)
+
+We also made a simple API to get city risk data:
+```bash
+poetry run uvicorn earthquake_exposure.api:app --reload
+```
+
+Then go to http://localhost:8000/docs to see the API documentation. You can get risk data for cities through the endpoints.
+
+### 5. Run the tests
+
+To run the tests:
+```bash
+poetry run python tests/verify_pga_pipeline.py
+```
+
+This runs 5 tests to check that everything works.
 
 ## Project structure
 

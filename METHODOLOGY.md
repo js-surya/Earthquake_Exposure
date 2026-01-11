@@ -158,7 +158,27 @@ There are some things our analysis doesn't handle well:
 
 ---
 
-## 7. References
+## 7. Workload Distribution
+
+This is how we split up the work:
+
+**Surya (S3664414):**
+- Set up the project structure and Poetry
+- Wrote the data acquisition code (acquire.py)
+- Implemented the PGA calculations (metrics.py)
+- Created the interactive visualizations
+
+**Govindharajulu (S3582361):**
+- Implemented the KD-tree spatial indexing (spatial_index.py)
+- Built the REST API (api.py)
+- Wrote the tests
+- Wrote the methodology document
+
+We both worked together on debugging and making sure everything worked correctly.
+
+---
+
+## 8. References
 
 1. Campbell, K. W., & Bozorgnia, Y. (2008). NGA ground motion model. Earthquake Spectra.
 2. USGS Earthquake Catalog: https://earthquake.usgs.gov/
