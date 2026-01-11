@@ -5,6 +5,18 @@ import os
 
 CACHE_FOLDER = "../data"
 
+ASIAN_COUNTRIES = [
+    'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 
+    'Bhutan', 'Brunei', 'Cambodia', 'China', 'Georgia', 'India', 
+    'Indonesia', 'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan',
+    'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Malaysia', 'Maldives',
+    'Mongolia', 'Myanmar', 'Nepal', 'North Korea', 'Oman', 'Pakistan',
+    'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore',
+    'South Korea', 'Sri Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand',
+    'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates',
+    'Uzbekistan', 'Vietnam', 'Yemen', 'Russia'
+]
+
 def get_earthquake_data(days_back=90, min_mag=5.0):
     """Get earthquake data from USGS (Asia region only)"""
     url = "https://earthquake.usgs.gov/fdsnws/event/1/query"
@@ -54,22 +66,10 @@ def get_cities_data():
         cities = cities[cities['pop_max'] > 100000].copy()
         
         # Filter for Asian countries only
-        asian_countries = [
-            'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 
-            'Bhutan', 'Brunei', 'Cambodia', 'China', 'Georgia', 'India', 
-            'Indonesia', 'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan',
-            'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Malaysia', 'Maldives',
-            'Mongolia', 'Myanmar', 'Nepal', 'North Korea', 'Oman', 'Pakistan',
-            'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore',
-            'South Korea', 'Sri Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand',
-            'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates',
-            'Uzbekistan', 'Vietnam', 'Yemen', 'Russia'
-        ]
-        
         if 'adm0name' in cities.columns:
-            cities = cities[cities['adm0name'].isin(asian_countries)].copy()
+            cities = cities[cities['adm0name'].isin(ASIAN_COUNTRIES)].copy()
         elif 'ADM0NAME' in cities.columns:
-            cities = cities[cities['ADM0NAME'].isin(asian_countries)].copy()
+            cities = cities[cities['ADM0NAME'].isin(ASIAN_COUNTRIES)].copy()
         
         if 'pop_max' in cities.columns:
             cities = cities.rename(columns={'pop_max': 'POP_MAX'})
@@ -88,22 +88,8 @@ def get_country_boundaries():
         # Load the built-in low resolution countries dataset
         world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
         
-        asian_countries = [
-            'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 
-            'Bhutan', 'Brunei', 'Cambodia', 'China', 'Georgia', 'India', 
-            'Indonesia', 'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan',
-            'Kuwait', 'Kyrgyzstan', 'Laos', 'Lebanon', 'Malaysia', 'Maldives',
-            'Mongolia', 'Myanmar', 'Nepal', 'North Korea', 'Oman', 'Pakistan',
-            'Palestine', 'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore',
-            'South Korea', 'Sri Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand',
-            'Timor-Leste', 'Turkey', 'Turkmenistan', 'United Arab Emirates',
-            'Uzbekistan', 'Vietnam', 'Yemen', 'Russia'
-        ]
+        asia = world[world['name'].isin(ASIAN_COUNTRIES)].copy()
         
-        asia = world[world['name'].isin(asian_countries)].copy()
-        
-        # If dataset uses different names (e.g. United States of America vs United States)
-        # We might miss some, but the list covers standard NE names.
         return asia
     except Exception as e:
         print("Could not load boundaries:", e)
