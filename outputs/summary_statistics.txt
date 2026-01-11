@@ -2,18 +2,18 @@
 SEISMIC RISK ANALYSIS - SUMMARY STATISTICS
 --------------------------------------------------
 
-Analysis Date: 2026-01-11 17:52
+Analysis Date: 2026-01-11 18:01
 Time Period: 2025-01-01 to 2025-12-31
 
-Total Cities Analyzed: 1721
+Total Cities Analyzed: 964
 Total Earthquakes: 1263
 
 Risk Category Distribution:
 risk_category
-MINIMAL     1701
-LOW           15
-MODERATE       4
-CRITICAL       1
+MINIMAL     944
+LOW          15
+MODERATE      4
+CRITICAL      1
 
 Top 10 Highest Risk Cities:
      city_name     country  max_pga risk_category

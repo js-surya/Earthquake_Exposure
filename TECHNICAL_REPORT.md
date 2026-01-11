@@ -29,7 +29,11 @@ We used the USGS Earthquake Catalog API to get all the earthquakes in Asia for 2
 - Minimum magnitude: 5.0
 
 ### City Data
-For cities, we used Natural Earth's populated places dataset. We only looked at cities with population over 250,000 since those are the major urban areas.
+For cities, we used Natural Earth's populated places dataset. We filtered for:
+- Population over 250,000 (major urban areas only)
+- Located in Asia region (longitude 25° to 180°, latitude -10° to 80°)
+
+This covers cities from the Middle East to Japan, and from Indonesia to Siberia.
 
 ---
 

@@ -132,7 +132,7 @@ def get_country_boundaries():
         return gpd.GeoDataFrame()
 
 def load_asian_cities(min_population=250000):
-    # loads cities and filters by population size
+    # loads cities and filters by population size AND Asia region
     cities = get_cities_data()
     
     if cities.empty:
@@ -151,5 +151,19 @@ def load_asian_cities(min_population=250000):
     
     # only keep cities above the population threshold
     cities = cities[cities['population'] >= min_population].copy()
+    
+    # filter by Asia bounding box (longitude 25-180, latitude -10-80)
+    # this covers from Middle East to Japan, Indonesia to Siberia
+    cities['lon'] = cities.geometry.x
+    cities['lat'] = cities.geometry.y
+    
+    asia_filter = (
+        (cities['lon'] >= 25) & (cities['lon'] <= 180) &
+        (cities['lat'] >= -10) & (cities['lat'] <= 80)
+    )
+    cities = cities[asia_filter].copy()
+    
+    # clean up temp columns
+    cities = cities.drop(columns=['lon', 'lat'])
     
     return cities
