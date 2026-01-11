@@ -2,6 +2,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import folium
 import pandas as pd
+import json
 
 def generate_interactive_map(cities_gdf, eq_gdf, exposure_df):
     """Generate Folium map with cities and earthquakes"""
@@ -113,8 +114,7 @@ def generate_plotly_map(cities_gdf, eq_gdf, exposure_df, boundaries_gdf=None):
     # Layer 0: Country Boundaries (Lines)
     if boundaries_gdf is not None and not boundaries_gdf.empty:
         # Convert polygons to lines for Plotly
-        # We use a trick: GeoJSON source with line styling
-        geojson = eval(boundaries_gdf.to_json())
+        geojson = json.loads(boundaries_gdf.to_json())
         
         # Add a Choropleth layer but with standard color (act as background/highlight)
         fig.add_trace(go.Choroplethmapbox(
