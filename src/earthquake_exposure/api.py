@@ -6,12 +6,12 @@ app = FastAPI()
 
 @app.get("/")
 def home():
-    """Welcome message"""
+    # just a welcome message
     return {"message": "Welcome to the Earthquake Exposure API!"}
 
 @app.get("/latest_quakes")
 def get_latest(min_mag: float = 5.0):
-    """Get latest earthquakes"""
+    # get recent earthquakes
     gdf = get_earthquake_data(days_back=7, min_mag=min_mag)
     
     if gdf.empty:
@@ -31,4 +31,3 @@ def get_latest(min_mag: float = 5.0):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-

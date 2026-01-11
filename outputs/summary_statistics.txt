@@ -1,0 +1,29 @@
+--------------------------------------------------
+SEISMIC RISK ANALYSIS - SUMMARY STATISTICS
+--------------------------------------------------
+
+Analysis Date: 2026-01-11 11:44
+Time Period: 2025-01-01 to 2025-12-31
+
+Total Cities Analyzed: 1721
+Total Earthquakes: 1263
+
+Risk Category Distribution:
+risk_category
+MINIMAL     1701
+LOW           15
+MODERATE       4
+CRITICAL       1
+
+Top 10 Highest Risk Cities:
+     city_name     country  max_pga risk_category
+      Mandalay     Myanmar 2.462771      CRITICAL
+       Hualien      Taiwan 0.189538      MODERATE
+    Banda Aceh   Indonesia 0.158883      MODERATE
+      Miyazaki       Japan 0.156035      MODERATE
+     Naypyidaw     Myanmar 0.120336      MODERATE
+        Longxi       China 0.088862           LOW
+     Balikesir      Turkey 0.086300           LOW
+        Chiayi      Taiwan 0.064521           LOW
+Mazar-e Sharif Afghanistan 0.058970           LOW
+        Tainan      Taiwan 0.044121           LOW

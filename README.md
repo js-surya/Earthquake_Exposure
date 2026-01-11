@@ -1,58 +1,73 @@
-# Earthquake Exposure Analysis - Asia
+# Earthquake Exposure Analysis
 
-**Authors:** Surya Jamuna Rani Subramanian & Govindharajulu Ramachandran  
-**Course:** Scientific Programming for Geospatial Sciences (Assignment 1)
+A project to figure out which cities in Asia are most at risk from earthquakes.
 
-This project analyzes seismic risk for cities in the Asian region over the last 90 days. It downloads live earthquake data from USGS, combines it with populated places from Natural Earth, and calculates a risk exposure score for each city.
+## What it does
 
-## Structure
-- `src/`: Python source code
-- `data/`: Where datasets go
-- `notebooks/`: Jupyter notebooks for testing
+This project:
+1. Downloads earthquake data from USGS (all M5.0+ earthquakes in 2025)
+2. Calculates Peak Ground Acceleration (PGA) for major Asian cities
+3. Makes interactive maps and charts to show the results
 
-## Installation
+## How to run it
 
-This project uses Poetry for dependency management.
+### 1. Clone the repo
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/js-surya/earthquake_exposure.git
-   cd earthquake_exposure
-   ```
+First, fork this repository on GitHub, then clone it:
+```bash
+git clone https://github.com/YOUR_USERNAME/earthquake_exposure.git
+cd earthquake_exposure
+```
 
-2. Install dependencies:
+### 2. Install dependencies
 
-   ```bash
-   poetry install
-   ```
+Make sure you have Python 3.10+ and Poetry installed, then:
+```bash
+poetry install
+```
 
-## How to Run
+### 3. Run the analysis
 
-### 1. Interactive Analysis (Jupyter Notebook)
-
-The main analysis and visualizations are in the notebook.
-
+Open the Jupyter notebook:
 ```bash
 poetry run jupyter notebook notebooks/exploration.ipynb
 ```
-Open the link in your browser and run all cells to see the interactive dashboard and map.
 
-### 2. REST API (Optional)
-We also created a simple REST API to query the earthquake data. You can start it with:
-```bash
-poetry run uvicorn src.earthquake_exposure.api:app --reload
+
+Then just run all the cells. It will:
+- Fetch the earthquake data
+- Calculate risk for each city
+- Generate the visualizations
+
+### Output files
+
+Results are saved to the `outputs/` folder:
+- `seismic_risk_results.csv` - all the city risk data
+- `summary_statistics.txt` - quick overview of results
+
+## Project structure
+
+```
+earthquake_exposure/
+├── src/earthquake_exposure/
+│   ├── acquire.py        # gets the data
+│   ├── preprocess.py     # cleans it up
+│   ├── spatial_index.py  # KD-tree for fast searching
+│   ├── metrics.py        # PGA calculations
+│   └── viz.py           # makes the maps
+├── notebooks/
+│   └── exploration.ipynb # main analysis
+├── outputs/              # results go here
+└── METHODOLOGY.md        # explains how it works
 ```
 
-Then visit these URLs:
-- `http://127.0.0.1:8000/` - Just shows a welcome message
-- `http://127.0.0.1:8000/latest_quakes?min_mag=6.0` - Gets earthquakes from the last week
+## Libraries used
 
-The `min_mag` parameter filters by magnitude (default is 5.0).
+- GeoPandas - geographic data handling
+- Plotly - interactive visualizations
+- SciPy - KD-tree spatial indexing
+- Pandas/NumPy - data processing
 
-**Tip:** FastAPI automatically creates documentation at `http://127.0.0.1:8000/docs` where you can test the endpoints in your browser.
+## Authors
 
-### 3. Run Tests
-To verify the logic (data cleaning, projection, metrics):
-```bash
-poetry run pytest tests/ -v
-```
+Surya Jamuna Rani Subramanian & Govindharajulu Ramachandran
