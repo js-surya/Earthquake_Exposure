@@ -85,11 +85,25 @@ def get_cities_data():
 def get_country_boundaries():
     """Get country polygon boundaries (Asia only)"""
     try:
-        # Load the built-in low resolution countries dataset
-        world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
-        
+        # Check cache first
+        local_path = os.path.join(CACHE_FOLDER, "ne_110m_admin_0_countries.json")
+        if os.path.exists(local_path):
+            world = gpd.read_file(local_path)
+        else:
+            # Download from Natural Earth (Low Res 1:110m)
+            url = "https://raw.githubusercontent.com/martynafford/natural-earth-geojson/master/110m/cultural/ne_110m_admin_0_countries.json"
+            print("Downloading country boundaries...")
+            world = gpd.read_file(url)
+            # Standardize column names if needed
+            if 'NAME' in world.columns and 'name' not in world.columns:
+                 world['name'] = world['NAME']
+            
+            # Cache it
+            if not os.path.exists(CACHE_FOLDER):
+                os.makedirs(CACHE_FOLDER)
+            world.to_file(local_path, driver="GeoJSON")
+
         asia = world[world['name'].isin(ASIAN_COUNTRIES)].copy()
-        
         return asia
     except Exception as e:
         print("Could not load boundaries:", e)
