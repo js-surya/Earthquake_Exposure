@@ -48,12 +48,17 @@ Results are saved to the `outputs/` folder:
 
 ### 4. Run the REST API (optional)
 
-We also made a simple API to get city risk data:
+We also made a simple API to get earthquake data:
 ```bash
 poetry run uvicorn earthquake_exposure.api:app --reload
 ```
 
-Then go to http://localhost:8000/docs to see the API documentation. You can get risk data for cities through the endpoints.
+Then go to http://localhost:8000/docs to see the API documentation.
+
+**Available endpoints:**
+- `http://localhost:8000/` - Welcome message
+- `http://localhost:8000/latest_quakes` - Get recent M5+ earthquakes
+- `http://localhost:8000/docs` - Interactive API docs
 
 ### 5. Run the tests
 
@@ -63,6 +68,20 @@ poetry run python tests/verify_pga_pipeline.py
 ```
 
 This runs 5 tests to check that everything works.
+
+### 6. Alternative: Using Conda
+
+If you prefer using Conda instead of Poetry, you can create an environment manually:
+
+```bash
+conda create -n earthquake python=3.10 geopandas pandas numpy scipy plotly requests fastapi uvicorn -y
+conda activate earthquake
+```
+
+Then you can run the commands directly:
+- Notebook: `jupyter notebook notebooks/exploration.ipynb`
+- API: `cd src && python -m uvicorn earthquake_exposure.api:app --reload`
+- Tests: `python tests/verify_pga_pipeline.py`
 
 ## Project structure
 

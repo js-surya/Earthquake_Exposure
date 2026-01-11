@@ -95,8 +95,16 @@ We wrote the code in Python and split it into different files:
 - `spatial_index.py` - the KD-tree stuff
 - `metrics.py` - calculates PGA values
 - `viz.py` - makes the maps and charts
+- `api.py` - simple REST API to get earthquake data
 
 The main analysis runs in a Jupyter notebook (`exploration.ipynb`).
+
+### REST API:
+We made a simple API using FastAPI. It has these endpoints:
+- `/` - Welcome message
+- `/latest_quakes` - Get recent M5+ earthquakes from USGS
+- `/docs` - Interactive API documentation
+
 
 ### Libraries we used:
 - GeoPandas for the geographic data
